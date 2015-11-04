@@ -1,6 +1,6 @@
 {
   "name": "monkberry-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Monkberry loader for webpack",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/monkberry/monkberry-loader#readme",
   "dependencies": {
-    "loader-utils": "^0.2.11",
+    "loader-utils": "^0.2.11"
+  },
+  "peerDependencies": {
     "monkberry": "*"
   }
 }
