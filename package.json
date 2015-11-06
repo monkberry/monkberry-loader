@@ -1,6 +1,6 @@
 {
   "name": "monkberry-loader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Monkberry loader for webpack",
   "main": "index.js",
   "scripts": {

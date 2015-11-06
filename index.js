@@ -5,14 +5,13 @@ module.exports = function (content) {
   this.cacheable();
 
   var compiler = new Compiler();
-  var filename = loaderUtils.interpolateName(this, '[name].[ext]', {content: content});
-  var name = loaderUtils.interpolateName(this, '[name]', {content: content});
 
-  compiler.addSource(name, content);
+  var request = loaderUtils.getCurrentRequest(this);
 
-  var output = compiler.compile(true).toStringWithSourceMap({
-    file: filename
-  });
+  compiler.addSource(request, content);
 
-  this.callback(null, output.code.toString(), output.map.toString());
+  var output = compiler.compile(true).toStringWithSourceMap();
+  output.map.setSourceContent(request, content);
+
+  this.callback(null, output.code, output.map.toJSON());
 };
