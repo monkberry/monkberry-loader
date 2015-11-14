@@ -1,22 +1,29 @@
 var monkberry = require('monkberry');
 var Proxy = require('./proxy');
 
-module.exports = function (factory) {
-  // Log every rendered proxy view.
-  monkberry.__views__ = monkberry.__views__ || {};
+var isPatched = false;
+var render;
 
-  // Patch monkberry render.
-  var render = monkberry.render;
-  monkberry.render = function (name, data) {
-    var view = render.call(monkberry, name, data, true);
-    var proxy = new Proxy(view, data);
+module.exports = function (factory, name) {
+  if (!isPatched) {
+    // Log every rendered proxy view.
+    monkberry.__views__ = monkberry.__views__ || {};
 
-    // Save to lists.
-    monkberry.__views__[name] = monkberry.__views__[name] || [];
-    monkberry.__views__[name].push(proxy);
+    // Patch monkberry render.
+    render = monkberry.render;
+    monkberry.render = function (name, data) {
+      var view = render.call(monkberry, name, data, true);
+      var proxy = new Proxy(view, data);
 
-    return proxy;
-  };
+      // Save to lists.
+      monkberry.__views__[name] = monkberry.__views__[name] || [];
+      monkberry.__views__[name].push(proxy);
+
+      return proxy;
+    };
+
+    isPatched = true;
+  }
 
   // Clear pool.
   monkberry.pool.store = {};
@@ -24,12 +31,19 @@ module.exports = function (factory) {
   // Update templates
   monkberry.mount(factory);
 
-  var views = factory(monkberry, document);
-  Object.keys(views).forEach(function (name) {
-    if(monkberry.__views__[name]) {
-      monkberry.__views__[name].forEach(function (proxy) {
-        proxy.ref(monkberry._render(name, proxy.data, true));
-      });
+  if (monkberry.__views__[name]) {
+    for (var i = monkberry.__views__[name].length - 1; i >= 0; i--) {
+      var proxy = monkberry.__views__[name][i];
+
+      if(proxy.ref(render.call(monkberry, name, undefined, true))) {
+        console.log('UPDATE(' + i + ')', name);
+        proxy.update(proxy.data);
+      } else {
+        console.log('DROP(' + i + ')', name);
+        // Drop proxy from views as them no more persists on page.
+        monkberry.__views__[name].splice(i, 1);
+      }
+
     }
-  });
+  }
 };

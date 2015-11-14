@@ -11,9 +11,14 @@ function Proxy(view, data) {
 }
 
 Proxy.prototype.ref = function (newView) {
-  newView.insertBefore(this.view.nodes[0]);
-  this.view.remove(true);
-  this.view = newView;
+  if (this.view.nodes.length > 0 && presentInDocument(this.view.nodes[0])) {
+    newView.insertBefore(this.view.nodes[0]);
+    this.view.remove(true);
+    this.view = newView;
+    return true;
+  } else {
+    return false;
+  }
 };
 
 Proxy.prototype.dom = function () {
@@ -40,5 +45,17 @@ Proxy.prototype.appendTo = function (node) {
 Proxy.prototype.insertBefore = function (node) {
   return this.view.insertBefore(node);
 };
+
+function presentInDocument(node) {
+  if (node) {
+    if (node.parentNode == window.document) {
+      return true;
+    } else {
+      return presentInDocument(node.parentNode);
+    }
+  } else {
+    return false;
+  }
+}
 
 module.exports = Proxy;

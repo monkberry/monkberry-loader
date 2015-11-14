@@ -6,6 +6,7 @@ module.exports = function (content) {
   this.cacheable();
   var query = loaderUtils.parseQuery(this.query);
   var request = loaderUtils.getCurrentRequest(this);
+  var name = loaderUtils.interpolateName(this, '[name]', {content: content});
 
   var compiler = new Compiler();
   compiler.addSource(request, content);
@@ -17,7 +18,7 @@ module.exports = function (content) {
       '		module.hot.accept();\n',
       '   var content = require(' + loaderUtils.stringifyRequest(this, '!!' + request) + ');\n',
       '   var update = require(' + loaderUtils.stringifyRequest(this, '!' + path.join(__dirname, 'hot/update.js')) + ');\n',
-      '   update(content);\n',
+      '   update(content, "' + name + '");\n',
       '}\n'
     ]);
   }

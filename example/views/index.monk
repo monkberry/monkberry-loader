@@ -5,7 +5,7 @@
     {% for value of list %}
         {% if value % 2 == 0 %}
             <li>
-                {{ value }}: {{ name }}
+                {{ value }}: <part text="{{ name }}"/>
             </li>
         {% endif %}
     {% endfor %}
