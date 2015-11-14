@@ -36,10 +36,8 @@ module.exports = function (factory, name) {
       var proxy = monkberry.__views__[name][i];
 
       if(proxy.ref(render.call(monkberry, name, undefined, true))) {
-        console.log('UPDATE(' + i + ')', name);
         proxy.update(proxy.data);
       } else {
-        console.log('DROP(' + i + ')', name);
         // Drop proxy from views as them no more persists on page.
         monkberry.__views__[name].splice(i, 1);
       }
