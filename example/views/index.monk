@@ -1,3 +1,12 @@
-<div>
-    Hello, {{ name }}
-</div>
+<h1>
+    Hello, {{ name }}!
+</h1>
+<ul>
+    {% for value of list %}
+        {% if value % 2 == 0 %}
+            <li>
+                {{ value }}: {{ name }}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
