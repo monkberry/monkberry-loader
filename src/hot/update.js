@@ -39,6 +39,7 @@ module.exports = function (factory, name) {
         proxy.update(proxy.data);
       } else {
         // Drop proxy from views as them no more persists on page.
+        proxy.remove(true);
         monkberry.__views__[name].splice(i, 1);
       }
 
