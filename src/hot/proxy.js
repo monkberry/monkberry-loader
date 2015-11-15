@@ -2,7 +2,7 @@ function Proxy(view, data) {
   this.view = view;
   this.data = data;
 
-  ['name', 'parent', 'nested', 'nodes', 'wrapped', 'onRender', '__update__'].forEach((name) => {
+  ['name', 'parent', 'nested', 'nodes', 'wrapped', 'onRender', 'onRemove', '__update__'].forEach((name) => {
     Object.defineProperty(this, name, {
       get: () => this.view[name],
       set: (value) => this.view[name] = value
