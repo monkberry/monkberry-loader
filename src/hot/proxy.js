@@ -46,6 +46,14 @@ Proxy.prototype.insertBefore = function (node) {
   return this.view.insertBefore(node);
 };
 
+Proxy.prototype.getElementById = function (id) {
+  return this.view.getElementById(id);
+};
+
+Proxy.prototype.querySelector = function (query) {
+  return this.view.querySelector(query);
+};
+
 function presentInDocument(node) {
   if (node) {
     if (node.parentNode == window.document) {
