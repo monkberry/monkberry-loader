@@ -1,4 +1,4 @@
-var Compiler = require('../../monkberry').Compiler;
+var Compiler = require('monkberry').Compiler;
 var loaderUtils = require('loader-utils');
 var path = require('path');
 
