@@ -54,6 +54,14 @@ Proxy.prototype.querySelector = function (query) {
   return this.view.querySelector(query);
 };
 
+Proxy.prototype.on = function (eventType, selector, handler, useCapture) {
+  return this.view.on(eventType, selector, handler, useCapture);
+};
+
+Proxy.prototype.off = function (eventType, selector, handler, useCapture) {
+  return this.view.off(eventType, selector, handler, useCapture);
+};
+
 function presentInDocument(node) {
   if (node) {
     if (node.parentNode == window.document) {
