@@ -6,4 +6,4 @@ var view = v = monkberry.render('index', {
   name: 'world', list: [1, 2, 3, 4]
 });
 
-document.body.appendChild(view.dom());
+document.body.appendChild(view.createDocument());
