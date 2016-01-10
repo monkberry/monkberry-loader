@@ -10,7 +10,8 @@ module.exports = {
         test: /\.monk$/,
         loader: '../src/index',
         query: {
-          hot: true
+          hot: true,
+          globals: ['window']
         }
       }
     ]

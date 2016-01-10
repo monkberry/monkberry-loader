@@ -24,3 +24,29 @@ module.exports = {
   devtool: 'source-map'
 };
 ```
+
+## Hot Update
+
+To use hot update add `hot` query param:
+
+```js
+loaders: [
+  {
+    test: /\.monk$/,
+    loader: 'monkberry-loader',
+    query: {
+      hot: true
+    }
+  }
+]
+```
+
+## Globals 
+
+You can specify globals in query:
+
+```js
+query: {
+  globals: ['window']
+}
+```

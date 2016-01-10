@@ -8,6 +8,11 @@ module.exports = function (content) {
   var request = loaderUtils.getCurrentRequest(this);
 
   var compiler = new Compiler();
+
+  if (query.globals) {
+    compiler.globals = query.globals;
+  }
+
   compiler.addSource(request, content);
   var node = compiler.compile(true);
 
