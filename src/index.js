@@ -1,6 +1,7 @@
 var Compiler = require('monkberry').Compiler;
 var loaderUtils = require('loader-utils');
 var path = require('path');
+var cardinal = require('cardinal');
 
 module.exports = function (content) {
   this.cacheable();
@@ -14,7 +15,13 @@ module.exports = function (content) {
   }
 
   compiler.addSource(request, content);
-  var node = compiler.compile(true);
+
+  try {
+    var node = compiler.compile(true);
+  } catch (error) {
+    this.emitError(error.toString());
+    return '';
+  }
 
   if (query.hot) {
     node.add([
