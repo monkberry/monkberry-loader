@@ -1,7 +1,6 @@
 var Compiler = require('monkberry').Compiler;
 var loaderUtils = require('loader-utils');
 var path = require('path');
-var cardinal = require('cardinal');
 
 module.exports = function (content) {
   this.cacheable();
