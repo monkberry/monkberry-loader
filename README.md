@@ -41,6 +41,8 @@ loaders: [
 ]
 ```
 
+Look at [example](/example/app.js).
+
 ## Globals 
 
 You can specify globals in query:

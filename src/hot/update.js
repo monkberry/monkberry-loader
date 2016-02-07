@@ -6,10 +6,7 @@ var render, views = [];
 
 module.exports = function (factory) {
   if (!isPatched) {
-    // Patch monkberry render.
-    render = monkberry.render;
-    monkberry.render = function (name, data) {
-      var view = render.call(monkberry, name, data, true);
+    monkberry.hot = function (view, data) {
       var proxy = new Proxy(view, data);
 
       // Save to lists.
@@ -26,14 +23,14 @@ module.exports = function (factory) {
   // Update templates
   monkberry.mount(factory);
 
-    for (var i = views.length - 1; i >= 0; i--) {
-      var proxy = views[i];
-      if (proxy.ref(render.call(monkberry, proxy.name, undefined, true))) {
-        proxy.update(proxy.data);
-      } else {
-        // Drop proxy from views as them no more persists on page.
-        proxy.remove(true);
-        views.splice(i, 1);
-      }
+  for (var i = views.length - 1; i >= 0; i--) {
+    var proxy = views[i];
+    if (proxy.ref(monkberry.render(proxy.name, undefined, true))) {
+      proxy.update(proxy.data);
+    } else {
+      // Drop proxy from views as them no more persists on page.
+      proxy.remove(true);
+      views.splice(i, 1);
     }
+  }
 };

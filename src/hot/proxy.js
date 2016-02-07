@@ -25,6 +25,10 @@ Proxy.prototype.dom = function () {
   return this.view.dom();
 };
 
+Proxy.prototype.createDocument = function () {
+  return this.view.createDocument();
+};
+
 Proxy.prototype.update = function (data) {
   if (this.data) {
     Object.assign(this.data, data);
