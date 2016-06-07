@@ -13,10 +13,8 @@ module.exports = function (content) {
     compiler.globals = query.globals;
   }
 
-  compiler.addSource(request, content);
-
   try {
-    var node = compiler.compile(true);
+    var node = compiler.compile(request, content);
   } catch (error) {
     this.emitError(error.toString());
     return '';
