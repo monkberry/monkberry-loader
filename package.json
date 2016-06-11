@@ -23,6 +23,6 @@
     "loader-utils": "^0.2.11"
   },
   "peerDependencies": {
-    "monkberry": "*"
+    "monkberry": "4.x"
   }
 }
