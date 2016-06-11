@@ -23,10 +23,9 @@ module.exports = function (content) {
   if (query.hot) {
     node.add([
       'if(module.hot) {\n',
-      '		module.hot.accept();\n',
-      '   var content = require(' + loaderUtils.stringifyRequest(this, '!!' + request) + ');\n',
-      '   var update = require(' + loaderUtils.stringifyRequest(this, '!' + path.join(__dirname, 'hot/update.js')) + ');\n',
-      '   update(content);\n',
+      'module.hot.accept();\n',
+      'require(' + loaderUtils.stringifyRequest(this, '!' + path.join(__dirname, 'update.js')) + ')',
+      '(require(' + loaderUtils.stringifyRequest(this, '!!' + request) + '));\n',
       '}\n'
     ]);
   }
