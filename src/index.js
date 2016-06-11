@@ -1,6 +1,5 @@
 var Compiler = require('monkberry').Compiler;
 var loaderUtils = require('loader-utils');
-var path = require('path');
 
 module.exports = function (content) {
   this.cacheable();
@@ -19,17 +18,7 @@ module.exports = function (content) {
     this.emitError(error.toString());
     return '';
   }
-
-  if (query.hot) {
-    node.add([
-      'if(module.hot) {\n',
-      'module.hot.accept();\n',
-      'require(' + loaderUtils.stringifyRequest(this, '!' + path.join(__dirname, 'update.js')) + ')',
-      '(require(' + loaderUtils.stringifyRequest(this, '!!' + request) + '));\n',
-      '}\n'
-    ]);
-  }
-
+  
   var output = node.toStringWithSourceMap();
   output.map.setSourceContent(request, content);
 

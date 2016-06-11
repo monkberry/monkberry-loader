@@ -25,24 +25,6 @@ module.exports = {
 };
 ```
 
-## Hot Update
-
-To use hot update add `hot` query param:
-
-```js
-loaders: [
-  {
-    test: /\.monk$/,
-    loader: 'monkberry-loader',
-    query: {
-      hot: true
-    }
-  }
-]
-```
-
-Look at [example](/example/app.js).
-
 ## Globals 
 
 You can specify globals in query:
