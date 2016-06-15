@@ -15,7 +15,7 @@ module.exports = function (content) {
   try {
     var node = compiler.compile(request, content);
   } catch (error) {
-    this.emitError(error.toString());
+    this.emitError(error.message);
     return '';
   }
   
