@@ -3,14 +3,21 @@ var loaderUtils = require('loader-utils');
 
 module.exports = function (content) {
   this.cacheable();
-  var query = loaderUtils.parseQuery(this.query);
-  var request = loaderUtils.getCurrentRequest(this);
+  var config = loaderUtils.getLoaderConfig(this, 'monkberry');
 
   var compiler = new Compiler();
 
-  if (query.globals) {
-    compiler.globals = query.globals;
+  if (config.globals) {
+    compiler.globals = config.globals;
   }
+
+  if (config.transforms) {
+    config.transforms.forEach(function (transform) {
+      compiler.transforms.push(transform);
+    });
+  }
+
+  var request = loaderUtils.getCurrentRequest(this);
 
   try {
     var node = compiler.compile(request, content);
