@@ -8,11 +8,7 @@ npm install monkberry-loader --save
 
 ```js
 module.exports = {
-  entry: "./app.js",
-  output: {
-    path: __dirname,
-    filename: "bundle.js"
-  },
+  ...
   module: {
     loaders: [
       {
@@ -21,16 +17,17 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map'
+  ...
 };
 ```
 
-## Globals 
+## Configuration 
 
-You can specify globals in query:
+Add `monkberry` section to your `webpack.config.js`:
 
 ```js
-query: {
-  globals: ['window']
+monkberry: {
+  globals: ['window'],
+  transforms: [...]
 }
 ```

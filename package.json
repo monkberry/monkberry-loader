@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/monkberry/monkberry-loader#readme",
   "dependencies": {
-    "loader-utils": "^0.2.11"
+    "loader-utils": "^0.2.15"
   },
   "peerDependencies": {
     "monkberry": "4.x"
