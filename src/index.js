@@ -13,7 +13,8 @@ module.exports = function (content) {
     compiler.globals = query.globals;
   }
 
-  compiler.addSource(request, content);
+  var paths = request.split('\\');
+  compiler.addSource(paths[paths.length - 1], content);
 
   try {
     var node = compiler.compile(true);
