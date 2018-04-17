@@ -10,23 +10,28 @@ npm install monkberry-loader --save
 module.exports = {
   ...
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.monk$/,
-        loader: 'monkberry-loader'
+        use: [
+          {
+            loader: 'monkberry-loader',
+            options: { /* ... */ }
+          }
+        ],
       }
     ]
   },
   ...
-};
+}
 ```
 
-## Configuration 
+## Configuration (optional)
 
-Add `monkberry` section to your `webpack.config.js`:
+Add `monkberry` options to your `webpack.config.js`:
 
 ```js
-monkberry: {
+options: {
   globals: ['window'],
   transforms: [...]
 }
