@@ -3,16 +3,16 @@ var loaderUtils = require('loader-utils');
 
 module.exports = function (content) {
   this.cacheable();
-  var config = loaderUtils.getLoaderConfig(this, 'monkberry');
+  var options = loaderUtils.getOptions(this) || {};
 
   var compiler = new Compiler();
 
-  if (config.globals) {
-    compiler.globals = config.globals;
+  if (options.globals) {
+    compiler.globals = options.globals;
   }
 
-  if (config.transforms) {
-    config.transforms.forEach(function (transform) {
+  if (options.transforms) {
+    options.transforms.forEach(function (transform) {
       compiler.transforms.push(transform);
     });
   }
